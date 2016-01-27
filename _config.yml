@@ -1,20 +1,18 @@
 # User Settings | Edit these according to your site
 
-title: Chaplin
-email: your@email.com
-author: Charlie Chaplin
-
-
+title: YalesonChan
+email: 2927096163@qq.com
+author: Cyw
 
 description: > # this means to ignore newlines until "baseurl:"
   Chaplin is a minimalistic, mobile friendly theme for Jekyll.
   The Documentation for it is available on this website itself. 
   You can check out the source on <a href="http://github.com/bk2dcradle/Chaplin" class="deactivate-link"><span> GitHub </span></a>
 
-url: "http://bk2dcradle.gitub.io" # the base hostname & protocol for your site
+url: "http://cyw3.gitub.io" # the base hostname & protocol for your site
 baseurl: "/Chaplin" # the subpath of your site, e.g. /blog
 twitter_username: AnkitSultana
-github_username:  bk2dcradle
+github_username:  cyw3
 
 permalink:          /:year/:title.html
 
