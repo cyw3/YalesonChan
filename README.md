@@ -2,7 +2,7 @@
 
 ### Installation
 
-Installation is easy. Simply download the theme [here](http://github.com/cyw3/YalesonChan/archive/master.zip) and run `bundle exec jekyll serve` inside the directory.
+Installation is easy. Simply download the theme [here](http://github.com/cyw3/YalesonChan) and run `bundle exec jekyll serve` inside the directory.
 
 However, before going live, set the following variables in `_config.yml`
 
