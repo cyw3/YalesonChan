@@ -34,7 +34,7 @@ author_site: https://github.com/cyw3
 ## 2.收益率走势图效果图展示
 哎呀，我也不说什么太虚的了。直接开干。以下便是我们代码实现的效果图了。怎么样？很棒吧！觉得羡慕吧！羡慕就继续往下看，走起。
 
-<iframe style="width:100%;height:600px;border:0;padding:0;margin:0;" src="https://console.qutke.com/diagram/info/569e7b5b310a3c4640649396?config={%22color%22:%22%23ffffff%22}"></iframe>
+<script id="qt_script___nDeG" config="{%22style%22:{%22width%22:%22100%%22},%22src%22:%22https://console.qutke.com/diagram/info/569e7b5b310a3c4640649396%22,%22childstyle%22:{%22width%22:%22100%%22,%22background-color%22:%22%23ffffff%22,%22box-shadow%22: %22none%22},%22type%22:%22parent%22}" src="https://s3.cn-north-1.amazonaws.com.cn/static.qutke.com/js/iframe-loader.js" ></script>
 
 ## 3.收益率走势图的代码实现以及优化
 1.系统环境
