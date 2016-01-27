@@ -1,8 +1,8 @@
-# Chaplin
+# YalesonChan
 
 ### Installation
 
-Installation is easy. Simply download the theme [here](http://github.com/bk2dcradle/Chaplin/archive/master.zip) and run `bundle exec jekyll serve` inside the directory.
+Installation is easy. Simply download the theme [here](http://github.com/cyw3/YalesonChan/archive/master.zip) and run `bundle exec jekyll serve` inside the directory.
 
 However, before going live, set the following variables in `_config.yml`
 
@@ -26,7 +26,7 @@ Change other variables under *User Settings* in `_config.yml` as you see fit.
 year-month-day-name-of-the-file.markdown
 ```
 
-* For Syntax highlighting, Chaplin uses *Rouge* which is the default highlighter in Jekyll 3 and above. If you don't know how to highlight a code block, [refer](http://jekyllrb.com/docs/templates/).
+* For Syntax highlighting, YalesonChan uses *Rouge* which is the default highlighter in Jekyll 3 and above. If you don't know how to highlight a code block, [refer](http://jekyllrb.com/docs/templates/).
 
 * To set up Google Analytics tracking id, just set the `tracking_id` variable in `_config.yml`. You also need to set `google_analytics` to `true`
 
