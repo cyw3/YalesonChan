@@ -44,9 +44,7 @@ author_site: https://github.com/cyw3
     RStudio编辑器
     qutke包
 
-
 需要提前下载况客R语言Api，即qutke，[GitHub链接](https://github.com/qutke/qutke)
-
 可以安装注册git，通过git命令来下载相应的R包。
 
 	git clone https://github.com/qutke/qutke.git 
@@ -56,7 +54,6 @@ author_site: https://github.com/cyw3
 
 	library(devtools)
 	install_github('qutke/qutke')
-
 
 2.初始化，弹药准备
 
