@@ -103,7 +103,7 @@ PageRank的计算基于以下两个`基本假设`：
       x/sum(x)
     }
 
-    pages<-read.table(file="C:\\Users\\cyw\\Documents\\GitHub\\Rcoder\\Algorithms\\page.csv",header=FALSE,sep=",")
+    pages<-read.table(file="page.csv",header=FALSE,sep=",")
     names(pages)<-c("src","dist");pages
 
 以下便开始执行程序。
@@ -149,7 +149,7 @@ dProbabilityMatrix是对于adjacencyMatrix函数的重构。
       A
     }
 
-    > pages<-read.table(file="C:\\Users\\cyw\\Documents\\GitHub\\Rcoder\\Algorithms\\page.csv",header=FALSE,sep=",")
+    > pages<-read.table(file="page.csv",header=FALSE,sep=",")
     > names(pages)<-c("src","dist");pages
     
       src dist
@@ -197,7 +197,7 @@ dProbabilityMatrix是对于adjacencyMatrix函数的重构。
       x/sum(x)
     }
 
-    > pages<-read.table(file="C:\\Users\\cyw\\Documents\\GitHub\\Rcoder\\Algorithms\\page.csv",header=FALSE,sep=",")
+    > pages<-read.table(file="page.csv",header=FALSE,sep=",")
     > names(pages)<-c("src","dist");pages
         src dist
     1   1    2
