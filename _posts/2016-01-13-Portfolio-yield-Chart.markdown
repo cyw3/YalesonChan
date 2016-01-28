@@ -6,8 +6,6 @@ short_bio: If anyone at my funeral has a long face, I'll never speak to him agai
 author_site: https://github.com/cyw3
 ---
 
-# 投资组合的收益率走势图
-
 ## 前言
 各位看官好，我是小陈，今天又来献丑了。作为金融小白，小陈我最近一直在恶补投资方面的知识。而前些天，正好涌哥叫我用况客API实现一个投资组合的收益率走势图，感觉自己一身代码神功又有用武之地了。
 
@@ -23,6 +21,7 @@ author_site: https://github.com/cyw3
 3.收益率走势图的代码实现以及优化
 
 ## 1.投资组合以及收益率走势图的介绍
+
 美国经济学家马考维茨(Markowitz)曾这样说过：“若干种证券组成的投资组合，其收益是这些证券收益的加权平均数，但是其风险不是这些证券风险的加权平均风险，投资组合能降低非系统性风险。”
 
 马考维茨最著名的作品便是《投资组合理论》，他还因此获得了诺贝尔经济学奖。当然，本文的重点不是说要探讨马考维茨的“投资组合理论”云云（其实我也不懂）。但是这也足够说明了，合理的投资组合，能够让投资者获取更大的利益。投资者持有多种金融产品，不同的产品可能具有不同的市场地位和价值优势，需要综合评价企业的价值能力，进行投资组合分析。至于收益率走势图，显然是我们进行投资组合分析时的一大工具了。
@@ -116,7 +115,7 @@ author_site: https://github.com/cyw3
 	fwdAdjClose2 <- (fwdAdjClose2-fwdAdjClose2[1])/fwdAdjClose2[1]*100
 ```
 7.生成dataframe表格，并将数据发送到况客投研中心，以便后期处理
-```sh
+```R
 	#形成dataframe
 	yieldChart <- data.frame('date'=tradingDay,'2'=fwdAdjClose1,'3'=fwdAdjClose2)
 	names(yieldChart)<-c('日期',md[1,]$ChiAbbr,md[2,]$ChiAbbr)

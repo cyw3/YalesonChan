@@ -23,7 +23,7 @@ author_site: https://github.com/cyw3
  - 陳越威/男/1994
  - 本科/中南大学信息学院
  - 技术博客：http://cyw3.github.io/YalesonChan
- - Github: http://github.com/cyw3)
+ - Github: http://github.com/cyw3
 
  - 期望职位：数据分析实习生
 
