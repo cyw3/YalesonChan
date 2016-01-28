@@ -186,7 +186,6 @@ mcga实现了遗传算法的交配和突变的操作，并且可以进行大范�
       ylim = c(obj$stringMin[2], obj$stringMax[2]);
       plot(obj$population, xlim=xlim, ylim=ylim, 
            xlab="pi", ylab="sqrt(50)");
-      print('cccccccccccccccccccccccyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyywwwwwwwwwwwwwwwwwwwwwwwwww')
     }  
 
     # 运行遗传算法 在命令行中运行
