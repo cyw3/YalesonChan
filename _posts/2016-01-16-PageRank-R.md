@@ -15,9 +15,9 @@ author_site: https://github.com/cyw3
 
 1.PageRank的原理
 
-2.
+2.PageRank实现步骤
 
-3.
+3.R代码实现
 
 ## 1.PageRank的原理
 
