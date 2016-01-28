@@ -24,7 +24,8 @@ layout: default
               <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
               <strong> - </strong>
           </span>
-          <p class="post-stub">{{ post.content | strip_html | truncatewords: 40 }}</p>
+          <!-- post.content | -->
+          <p class="post-stub">{{  strip_html | truncatewords: 40 }}</p>
           <a href="{{ post.url | prepend: site.baseurl}}"> Read More </a>
         </article>
         
