@@ -45,12 +45,12 @@ Leap Motion的jar包是跨平台的，但是他的原生库必须要与系统平
 
 使用java编译器，javac编译，设置classpath选项以指定LeapJar文件。举个例子，要编译包含在Leap Motion SDk中的Sample.java，你可以使用一下命令行：
 
-```
+{% highlight ruby %}
 
 javac -classpath <LeapMotion>/lib/LeapJava.jar Sample.java
 
 
-```
+{% endhighlight %}
 
 (<LeapSDK>是指你安装的Leap Motion SDK所在的文件夹)
 
@@ -60,21 +60,22 @@ javac -classpath <LeapMotion>/lib/LeapJava.jar Sample.java
 
 在MAC上，你可以使用一下命令行运行'Sample'程序：
 
-```
+{% highlight ruby %}
 
 java -classpath ".:<LeapSDK>/lib/LeapJava.jar" -Sjava.library.path=<LeapSDK>/lib Sample
 
+{% endhighlight %}
 
-```
 
 在Windows下，你可以使用以下命令行在64-bit JVm下运行Sample程序：
 
-```
+{% highlight ruby %}
 
 java -classpath ".;<LeapSDK>/lib/LeapJava.jar" -Djava.library.path=<LeapSDK>/lib/x64 Sample
 
 
-```
+{% endhighlight %}
+
 
 ### Eclipse
 
@@ -169,16 +170,16 @@ Leap Motion软件可以在客户端计算机上作为一种服务(Windows)或者
 3. 'Sample.java'包含了这篇教程的最终代码，但是出于能够更加深入理解本篇教程的目的下，你可以重命名已经存在的这个Sample文件，然后在这个文件夹下创建一个新的、空白的'Sample.java'文件。保留已经存在的Sample文件，以供参考。
 4. 在你的'Sample.java'文件中，添加导入Leap Motion库的代码：
 
-```
+{% highlight ruby %}
 
 import com.leapmotion.leap.*;
 
 
-```
+{% endhighlight %}
 
 5. 添加主题代码，定义一个java命令行程序：
 
-```
+{% highlight ruby %}
 
 class Sample {
     public static void main(String[] args) {
@@ -193,7 +194,7 @@ class Sample {
     }
 }
 
-```
+{% endhighlight %}
 
 这个代码简单的打印了一条信息，然后等键盘输入任意键后退出。
 
@@ -201,7 +202,7 @@ class Sample {
 
 下一步是在程序中添加一个控制器对象[Controller](https://developer.leapmotion.com/documentation/java/api/Leap.Controller.html)--这个对象将会帮助我们连接到Leap Motion 服务/守护线程。
 
-```
+{% highlight ruby %}
 
 class Sample {
     public static void main(String[] args) {
@@ -217,7 +218,7 @@ class Sample {
     }
 }
 
-```
+{% endhighlight %}
 
 当你创建一个Controller对象的时候，他会自动的链接到Leap Motion设备，一旦连接建立，你可以通过使用Controlller.frame()方法得到所要的跟踪数据。
 
@@ -235,7 +236,7 @@ API中监听器类定义了当Controller事件触发时会被调用的函数的�
 
 那么，继续我们的教程，添加'SampleListener'类到你的程序之中。为了简单，我们添加'SampleListener'类到'Sample'类一样的文件下面吧。
 
-```
+{% highlight ruby %}
 
 class SampleListener extends Listener {
 
@@ -248,13 +249,13 @@ class SampleListener extends Listener {
     }
 }
 
-```
+{% endhighlight %}
 
 如果你已经看过了官方给的示例代码，你可能已经注意到了，回调函数的多次出现。你可能也想着吧他们都添加到自己的文件里面，如果你希望的话，但是为了保持代码简单，我们希望只专注于0nConnect()和onFrame()方法。
 
 现在使用你刚写的类创建一个'SampleListener'对象。然后把它添加到你的控制器里。
 
-```
+{% highlight ruby %}
 
 class Sample {
     public static void main(String[] args) {
@@ -278,7 +279,7 @@ class Sample {
     }
 }
 
-```
+{% endhighlight %}
 
 现在，你恶意运行测试一下你的'Sample'程序了。可以跳到后面查看Running the Sample的内容。
 
@@ -292,14 +293,14 @@ class Sample {
 
 控制器连接之后，你可以使用[Controller.enableGesture()](https://developer.leapmotion.com/documentation/java/api/Leap.Controller.html#javaclasscom_1_1leapmotion_1_1leap_1_1_controller_1ac2ee4e779963f135abccc183ab2f35fb)和[Controller.setPolicy()](https://developer.leapmotion.com/documentation/java/api/Leap.Controller.html#javaclasscom_1_1leapmotion_1_1leap_1_1_controller_1a272a235782d654778a1873a28f49a794)方法设置控制器的参数。比如：你可以通过以下'onConnect()'方法来设置滑动手势的使能化：
 
-```
+{% highlight ruby %}
 
 public void onConnect(Controller controller) {
     System.out.println("Connected");
     controller.enableGesture(Gesture.Type.TYPE_SWIPE);
 }
 
-```
+{% endhighlight %}
 
 ### On Frame
 
@@ -307,17 +308,17 @@ public void onConnect(Controller controller) {
 
 为了获得数据帧frame，要添加frame()方法到你的onframe()回调函数里面：
 
-```
+{% highlight ruby %}
 
 public void onFrame(Controller controller) {
     Frame frame = controller.frame();
 }
 
-```
+{% endhighlight %}
 
 然后，打印出Frame对象的一些属性：
 
-```
+{% highlight ruby %}
 
 public void onFrame(Controller controller) {
     Frame frame = controller.frame();
@@ -330,7 +331,7 @@ public void onFrame(Controller controller) {
                    + ", gestures " + frame.gestures().count());
 }
 
-```
+{% endhighlight %}
 
 那么，再次运行你的Sample，把一只或者两支手掌放在Leap Motion设备上面，你会在控制台窗口看到每一帧的基本属性。
 
@@ -343,38 +344,38 @@ public void onFrame(Controller controller) {
 1. 编译示例应用：
     - 在Windows系统下，确保'Sample.java'和'LeapJava.jar'在当前文件夹下面，然后输入以下命令行在命令行提示符后面，并运行：
 
-    ```
+    {% highlight ruby %}
     
     javac -classpath LeapJava.jar Sample.java
     
-    ```
+    {% endhighlight %}
     
     - 在Mac系统上，确保'Sample.java'和'LeapJava.jar'在当前文件夹下面，然后在终端里面运行以下命令行：
     
-    ```
+    {% highlight ruby %}
     
     javac -classpath ./LeapJava.jar Sample.java
     
     
-    ```
+    {% endhighlight %}
     
     
 2. 运行示例应用：
     - 在Windows系统下，确保'Sample.class','LeapJava.jar','LeapJava.dll',和'Leap.dll'在同一个文件夹下。如果你是用的是32-bit版本的JVM，需要使用SDk下的lib\x86文件夹下的.dll文件。如果你是用的是64-bit版本的JVM，需要使用SDk下的lib\x64文件夹下的.dll文件.在命令行提示符后输入并运行以下命令行：
     
-    ```
+    {% highlight ruby %}
     
     java -classpath "LeapJava.jar;." Sample
     
-    ```
+    {% endhighlight %}
     
     - 在Mac系统下，确保'Sample.class','LeapJava.jar','LeapJava.dll',和'Leap.dll'在同一个文件夹下。在终端中运行命令行：
     
-    ```
+    {% highlight ruby %}
     
     java -classpath "./LeapJava.jar:." Sample
     
-    ```
+    {% endhighlight %}
 
 当应用程序初始化并连接之后到Leap之后，你会看到"Connect"信息被打印在标准输出中。你还会看到frame的信息，在每一次'onframe'事件被调用后。
 
