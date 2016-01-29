@@ -37,12 +37,15 @@ OpenCV致力于真实世界的实时应用，通过优化的C代码的编写对�
 
 首先，我们来看看需要准备的什么吧。
 
-{% highlight ruby %}
+
 Win7系统
+
 [mingw-get-setup.exe](http://sourceforge.net/projects/mingw/files/Installer/)
+
 [opencv-2.4.9.exe](http://opencv.org/downloads.html)
+
 [cmake-3.2.0-rc1-win32-x86.exe](http://www.cmake.org/download/)
-{% endhighlight %}
+
 
 然后，双击opencv-2.4.9.exe，这是opencv的一个自解压程序，指定好安装目录，他将自动把.exe里的文件解压到指定目录。现在，咱们来看看OpenCV的目录结构吧。
 
@@ -62,13 +65,13 @@ Win7系统
 
 那么，接下来，我们便开始编译工作了。
 
-1. 安装MinGW。
+1)安装MinGW。
 
 
 很简单。直接双击，指定安装目录，确认安装即可。
 
 
-2. 出现以下界面，至少点击以下两图所示的条目，并安装。
+2)出现以下界面，至少点击以下两图所示的条目，并安装。
 
 
 ![MinGW0]({{site.baseurl}}/img/MinGW0.png)
@@ -76,31 +79,31 @@ Win7系统
 ![MinGW1]({{site.baseurl}}/img/MinGW1.png)
 
 
-3. 安装cmake
+3)安装cmake
 
-4. 运行cmake，在where is the source code中填入OpenCV源代码文件的路径，比如：“.../opencv_2410/sources”；在where to build the binaries中填入编译文件需要存放的路径，比如：“.../MinGW/Debug”(存放路径文件自己定义新建一个即可)。(三点表示省略)
+4)运行cmake，在where is the source code中填入OpenCV源代码文件的路径，比如：“.../opencv_2410/sources”；在where to build the binaries中填入编译文件需要存放的路径，比如：“.../MinGW/Debug”(存放路径文件自己定义新建一个即可)。(三点表示省略)
 
 ![cmake]({{site.baseurl}}/img/cmake.jpg)
 
-5. 点击“Configure”;在Specify the generator for this project中选择MinGW Makefiles(选择刚刚安装的MinGW或者本机已有的)，选中Specify native compilers，点击“Next”。
+5)点击“Configure”;在Specify the generator for this project中选择MinGW Makefiles(选择刚刚安装的MinGW或者本机已有的)，选中Specify native compilers，点击“Next”。
 
 ![cmake1]({{site.baseurl}}/img/cmake1.jpg)
 
-6. 选择编译器路径，这里Compilers: C 选择目录为“.../MinGW/bin/gcc.exe”; C++ 选择目录为 “.../MinGw/bin/g++.exe”，点击“Finish”
+6)选择编译器路径，这里Compilers: C 选择目录为“.../MinGW/bin/gcc.exe”; C++ 选择目录为 “.../MinGw/bin/g++.exe”，点击“Finish”
 
 ![cmake2]({{site.baseurl}}/img/cmake2.jpg)
 
-7. 然后再次点“Configure”
+7)然后再次点“Configure”
 
 ![cmake3]({{site.baseurl}}/img/cmake3.jpg)
 
-8. 等走完进度条，选择需要的Generate选项，此处可以不操作直接点“Generate”，走完进度条便生成了“MinGW Makefiles”
+8)等走完进度条，选择需要的Generate选项，此处可以不操作直接点“Generate”，走完进度条便生成了“MinGW Makefiles”
 
 ![cmake4]({{site.baseurl}}/img/cmake4.jpg)
 
-9. 之后用mingw对其进行编译，cmd打开命令提示符窗口，进到刚才的保存目录，这里是“E:/opencv2.4.10/MinGW/Debug”，输入“mingw32-make”，回车；等待运行完毕后，输入 mingw32-make install,回车；（此过程大约需1-2个小时）
+9)之后用mingw对其进行编译，cmd打开命令提示符窗口，进到刚才的保存目录，这里是“.../opencv2.4.10/MinGW/Debug”，输入“mingw32-make”，回车；等待运行完毕后，输入 mingw32-make install,回车；（此过程大约需1-2个小时）
 
-10. 运行完毕后便生成了mingw版的OpenCV库，进入“.../opencv2.4.10/MinGW/Debug/install”文件夹，便可以看到所需的头文件和库文件
+10)运行完毕后便生成了mingw版的OpenCV库，进入“.../opencv2.4.10/MinGW/Debug/install”文件夹，便可以看到所需的头文件和库文件
 
 ![cmake5]({{site.baseurl}}/img/cmake5.jpg)
 
@@ -109,17 +112,16 @@ Win7系统
 
 我所选用的IDE是
 
-{% highlight ruby %}
 [codeblocks-13.12mingw-setup.exe](http://www.codeblocks.org/)
-{% endhighlight %}
+
 
 codeblocks默认使用的编译器是MinGW。
 
-1. 双击安装codeblocks
+1)双击安装codeblocks
 
-2. 启动codeblocks，新建一个“Console application”项目，任意取一个名字。
+2)启动codeblocks，新建一个“Console application”项目，任意取一个名字。
 
-3. 测试代码如下
+3)测试代码如下
 
 {% highlight ruby %}
 #include "cv.h"  
@@ -136,23 +138,27 @@ int main()
 }  
 {% endhighlight %}
 
-4. 设置opencv相关头文件以及库文件路径
+4)设置opencv相关头文件以及库文件路径
 
 这一步是关键。因为还是有点麻烦的。
 
-1.右击项目名称，选build options：
+(1)右击项目名称，选build options：
+
 ![codeblocks0]({{site.baseurl}}/img/codeblocks0.jpg)
 
-2.弹出窗口，首先添加头文件路径，依次点击：Search directories->Complier->Add，选择头文件所在目录
-![codeblocks1]({{site.baseurl}}/img/codeblock1.png)
+(2)弹出窗口，首先添加头文件路径，依次点击：Search directories->Complier->Add，选择头文件所在目录
 
-3.选择库文件路径，依次点击Linker->Add，选择vc10下的lib库路径（下一篇博文会讲vc10，vc11，vc12之间的区别）
+![codeblocks1]({{site.baseurl}}/img/codeblocks1.png)
+
+(3)选择库文件路径，依次点击Linker->Add，选择vc10下的lib库路径
+
 ![codeblocks2]({{site.baseurl}}/img/codeblocks2.png)
 
-4.最后点击 Linker settings，添加相应库文件，这里如果不知道自己会用到那些库文件的话，可以将vc10/lib下的所有库文件全部添加进去
+(4)最后点击 Linker settings，添加相应库文件，这里如果不知道自己会用到那些库文件的话，可以将vc10/lib下的所有库文件全部添加进去
+
 ![codeblocks3]({{site.baseurl}}/img/codeblocks3.png)
 
-5. 动态库调用设置
+5)动态库调用设置
 
 两种方法任选其一即可：
 
