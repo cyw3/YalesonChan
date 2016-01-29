@@ -342,6 +342,7 @@ public void onFrame(Controller controller) {
 
 1. 编译示例应用：
     - 在Windows系统下，确保'Sample.java'和'LeapJava.jar'在当前文件夹下面，然后输入以下命令行在命令行提示符后面，并运行：
+
     ```
     
     javac -classpath LeapJava.jar Sample.java
