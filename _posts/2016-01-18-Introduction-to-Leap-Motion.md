@@ -49,6 +49,7 @@ Leap Motion的jar包是跨平台的，但是他的原生库必须要与系统平
 
 javac -classpath <LeapMotion>/lib/LeapJava.jar Sample.java
 
+
 ```
 
 (<LeapSDK>是指你安装的Leap Motion SDK所在的文件夹)
@@ -60,14 +61,18 @@ javac -classpath <LeapMotion>/lib/LeapJava.jar Sample.java
 在MAC上，你可以使用一下命令行运行'Sample'程序：
 
 ```
+
 java -classpath ".:<LeapSDK>/lib/LeapJava.jar" -Sjava.library.path=<LeapSDK>/lib Sample
+
 
 ```
 
 在Windows下，你可以使用以下命令行在64-bit JVm下运行Sample程序：
 
 ```
+
 java -classpath ".;<LeapSDK>/lib/LeapJava.jar" -Djava.library.path=<LeapSDK>/lib/x64 Sample
+
 
 ```
 
@@ -165,7 +170,9 @@ Leap Motion软件可以在客户端计算机上作为一种服务(Windows)或者
 4. 在你的'Sample.java'文件中，添加导入Leap Motion库的代码：
 
 ```
+
 import com.leapmotion.leap.*;
+
 
 ```
 
