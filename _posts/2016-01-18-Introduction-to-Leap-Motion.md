@@ -343,13 +343,9 @@ public void onFrame(Controller controller) {
 
 1. 编译示例应用：
     - 在Windows系统下，确保'Sample.java'和'LeapJava.jar'在当前文件夹下面，然后输入以下命令行在命令行提示符后面，并运行：
-
     {% highlight ruby %}
-    
     javac -classpath LeapJava.jar Sample.java
-    
     {% endhighlight %}
-    
     - 在Mac系统上，确保'Sample.java'和'LeapJava.jar'在当前文件夹下面，然后在终端里面运行以下命令行：
     
     {% highlight ruby %}
@@ -362,13 +358,9 @@ public void onFrame(Controller controller) {
     
 2. 运行示例应用：
     - 在Windows系统下，确保'Sample.class','LeapJava.jar','LeapJava.dll',和'Leap.dll'在同一个文件夹下。如果你是用的是32-bit版本的JVM，需要使用SDk下的lib\x86文件夹下的.dll文件。如果你是用的是64-bit版本的JVM，需要使用SDk下的lib\x64文件夹下的.dll文件.在命令行提示符后输入并运行以下命令行：
-    
     {% highlight ruby %}
-    
     java -classpath "LeapJava.jar;." Sample
-    
     {% endhighlight %}
-    
     - 在Mac系统下，确保'Sample.class','LeapJava.jar','LeapJava.dll',和'Leap.dll'在同一个文件夹下。在终端中运行命令行：
     
     {% highlight ruby %}
