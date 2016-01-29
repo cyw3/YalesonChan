@@ -42,19 +42,20 @@ author_site: https://github.com/cyw3
 
 过程：
 
-    1. 创建初始种群
+1. 创建初始种群
 
-    2. 循环：产生下一代
+2. 循环：产生下一代
 
-    3. 评价种群中的个体适应度
+3. 评价种群中的个体适应度
 
-    4. 定义选择的适应度函数
+4. 定义选择的适应度函数
 
-    5. 改变该种群（交配和变异）
+5. 改变该种群（交配和变异）
 
-    6. 返回第二步
+6. 返回第二步
 
-    7. 满足终止条件结束
+7. 满足终止条件结束
+
 
 ## 2.R语言实现
 
@@ -81,16 +82,20 @@ author_site: https://github.com/cyw3
 实值优化问题。使用的变量值表示基因序列，而不是字节码，因此不需要编解码的处理。
 mcga实现了遗传算法的交配和突变的操作，并且可以进行大范围和高精度的搜索空间的计算，算法的主要缺点是使用了256位的一元字母表。
 
-    install.packages("mcga")
-    library(mcga)
+{% highlight ruby %}
+install.packages("mcga")
+library(mcga)
 
-    #查看mcga的定义
-    mcga
+#查看mcga的定义
+mcga
+{% endhighlight %}
 
 这是mcga的方法定义。
 
+{% highlight ruby %}
     function (popsize, chsize, crossprob = 1, mutateprob = 0.01, 
              elitism = 1, minval, maxval, maxiter = 10, evalFunc) 
+{% endhighlight %}
 
 参数说明：
 
@@ -106,46 +111,50 @@ mcga实现了遗传算法的交配和突变的操作，并且可以进行大范�
 
 例子：fx=(x1-5)^2 + (x2-55)^2 +(x3-555)^2 +(x4-5555)^2 +(x5-55555)^2
 
-    # 定义适应度函数 
-    f <- function(x){
-      #总括号
-      return ((x[1]-5)^2+(x[2]-55)^2+(x[3]-555)^2+(x[4]-5555)^2+(x[5]-55555)^2)
-    }
+{% highlight ruby %}
+# 定义适应度函数 
+f <- function(x){
+  #总括号
+  return ((x[1]-5)^2+(x[2]-55)^2+(x[3]-555)^2+(x[4]-5555)^2+(x[5]-55555)^2)
+}
 
-    # 运行遗传算法
-    m <- mcga(   popsize=200, 
-                 chsize=5, 
-                 minval=0.0, 
-                 maxval=999999, 
-                 maxiter=2500, 
-                 crossprob=1.0, 
-                 mutateprob=0.01, 
-                 evalFunc=f)
+# 运行遗传算法
+m <- mcga(   popsize=200, 
+             chsize=5, 
+             minval=0.0, 
+             maxval=999999, 
+             maxiter=2500, 
+             crossprob=1.0, 
+             mutateprob=0.01, 
+             evalFunc=f)
 
-    # 最优化的个体结果
-    print(m$population[1,])
+# 最优化的个体结果
+print(m$population[1,])
 
-    # 执行时间
-    m$costs[1]    
+# 执行时间
+m$costs[1]    
+{% endhighlight %}
 
 同样，当题目改为fx=(x1-5)^2 + (x2-55)^2 +(x3-555)^2 +(x4-5555)^2 +(x5-55555)^2时候：
     
-    #这是适应度函数
-    f<-function(x){
-      return ((x[1]-7)^2 + (x[2]-77)^2 +(x[3]-777)^2 +(x[4]-7777)^2 +(x[5]-77777)^2)
-    }
+{% highlight ruby %}
+#这是适应度函数
+f<-function(x){
+  return ((x[1]-7)^2 + (x[2]-77)^2 +(x[3]-777)^2 +(x[4]-7777)^2 +(x[5]-77777)^2)
+}
 
-    m<-mcga(popsize=200, 
-      chsize=5, 
-      minval=0.0, 
-      maxval=999999999.9, 
-      maxiter=2500, 
-      crossprob=1.0, 
-      mutateprob=0.01, 
-      evalFunc=f)
-    cat("Best chromosome:\n")
-    print(m$population[1,])
-    cat("Cost: ",m$costs[1],"\n")
+m<-mcga(popsize=200, 
+  chsize=5, 
+  minval=0.0, 
+  maxval=999999999.9, 
+  maxiter=2500, 
+  crossprob=1.0, 
+  mutateprob=0.01, 
+  evalFunc=f)
+cat("Best chromosome:\n")
+print(m$population[1,])
+cat("Cost: ",m$costs[1],"\n")
+{% endhighlight %}
 
 2)genalg包
 
@@ -154,11 +163,14 @@ mcga实现了遗传算法的交配和突变的操作，并且可以进行大范�
 直方图显出了基因选择的频率，即基因在当前个体中被选择的次数。
 参数图表示评价函数和变量值，非常方便地看到评价函数和变量值的相关关系。
 
+{% highlight ruby %}
     install.packages("genalg")
     library(genalg)
+{% endhighlight %}
 
 这是genalg函数定义：
 
+{% highlight ruby %}
     rbga(stringMin=c(), stringMax=c(),
          suggestions=NULL,
          popSize=200, iters=100,
@@ -166,6 +178,7 @@ mcga实现了遗传算法的交配和突变的操作，并且可以进行大范�
          elitism=NA,
          monitorFunc=NULL, evalFunc=NULL,
          showSettings=FALSE, verbose=FALSE)
+{% endhighlight %}
 
 * stringMin，设置每个基因的最小值
 * stringMax，设置每个基因的最大值
@@ -182,72 +195,81 @@ mcga实现了遗传算法的交配和突变的操作，并且可以进行大范�
 
 例如：设fx=abs(x1-sqrt(exp(1)))+abs(x2-log(pi))，计算fx的最小值，其中x1,x2为2个不同的变量。
 
-    # 定义适应度函数
-    f<-function(x){
-      return(abs(x[1]-sqrt(exp(1)))+abs(x[2]-log(pi)))
-    } 
+{% highlight ruby %}
+# 定义适应度函数
+f<-function(x){
+  return(abs(x[1]-sqrt(exp(1)))+abs(x[2]-log(pi)))
+} 
 
-    # 定义监控函数
-    monitor <- function(obj){
-      xlim = c(obj$stringMin[1], obj$stringMax[1]);
-      ylim = c(obj$stringMin[2], obj$stringMax[2]);
-      plot(obj$population, xlim=xlim, ylim=ylim, 
-           xlab="pi", ylab="sqrt(50)");
-    }  
+# 定义监控函数
+monitor <- function(obj){
+  xlim = c(obj$stringMin[1], obj$stringMax[1]);
+  ylim = c(obj$stringMin[2], obj$stringMax[2]);
+  plot(obj$population, xlim=xlim, ylim=ylim, 
+       xlab="pi", ylab="sqrt(50)");
+}  
 
-    # 运行遗传算法 在命令行中运行
-    m2 = rbga(c(1,1),
-               c(3,3),
-               popSize=100,
-               iters=1000,
-               evalFunc=f,
-               mutationChance=0.01,
-               verbose=TRUE,
-               monitorFunc=monitor
-               )
+# 运行遗传算法 在命令行中运行
+m2 = rbga(c(1,1),
+           c(3,3),
+           popSize=100,
+           iters=1000,
+           evalFunc=f,
+           mutationChance=0.01,
+           verbose=TRUE,
+           monitorFunc=monitor
+           )
 
-    #计算结果
-    m2$population[1,]
+#计算结果
+m2$population[1,]
+{% endhighlight %}
 
 默认图输出，用于描述遗传过程的进展，X轴为迭代次数，Y轴评价值，评价值越接近于0越好。
 在1000迭代1000次后，基本找到了精确的结果。
 
+{% highlight ruby %}
     plot(m2)
+{% endhighlight %}
 
 直方图输出，用于描述对染色体的基因选择频率，即一个基因在染色体中的当前人口被选择的次数。
 当x1在1.65区域时，被选择超过80次；当x2在1.146区域时，被选择超过了80次。通过直方图，我们可以理解为更优秀的基因被留给了后代。
 
+{% highlight ruby %}
     plot(m2,type='hist')
+{% endhighlight %}
 
 参数图输出，用于描述评价函数和变量的值的相关关系。对于x1，评价值越小，变量值越准确，但相关关系不明显。对于x2，看不出相关关系。
 
+{% highlight ruby %}
     plot(m2,type='vars')
+{% endhighlight %}
 
 以下是genalg包官方给出的例子：
 
-    # optimize two values to match pi and sqrt(50)
-    evaluate <- function(string=c()) {
-      returnVal = NA;
-      if (length(string) == 2) {
-        returnVal = abs(string[1]-pi) + abs(string[2]-sqrt(50));
-      } else {
-        stop("Expecting a chromosome of length 2!");
-      }
-      returnVal
-    }
+{% highlight ruby %}
+# optimize two values to match pi and sqrt(50)
+evaluate <- function(string=c()) {
+  returnVal = NA;
+  if (length(string) == 2) {
+    returnVal = abs(string[1]-pi) + abs(string[2]-sqrt(50));
+  } else {
+    stop("Expecting a chromosome of length 2!");
+  }
+  returnVal
+}
 
-    monitor <- function(obj) {
-      # plot the population
-      xlim = c(obj$stringMin[1], obj$stringMax[1]);
-      ylim = c(obj$stringMin[2], obj$stringMax[2]);
-      plot(obj$population, xlim=xlim, ylim=ylim, 
-           xlab="pi", ylab="sqrt(50)");
-    }
+monitor <- function(obj) {
+  # plot the population
+  xlim = c(obj$stringMin[1], obj$stringMax[1]);
+  ylim = c(obj$stringMin[2], obj$stringMax[2]);
+  plot(obj$population, xlim=xlim, ylim=ylim, 
+       xlab="pi", ylab="sqrt(50)");
+}
 
-    rbga.results = rbga(c(1, 1), c(5, 10), monitorFunc=monitor, 
-                        evalFunc=evaluate, verbose=TRUE, mutationChance=0.01)
+rbga.results = rbga(c(1, 1), c(5, 10), monitorFunc=monitor, 
+                    evalFunc=evaluate, verbose=TRUE, mutationChance=0.01)
 
-    plot(rbga.results)
-    plot(rbga.results, type="hist")
-    plot(rbga.results, type="vars")
-
+plot(rbga.results)
+plot(rbga.results, type="hist")
+plot(rbga.results, type="vars")
+{% endhighlight %}

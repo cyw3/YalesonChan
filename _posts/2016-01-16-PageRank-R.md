@@ -90,114 +90,119 @@ PageRank的计算基于以下两个`基本假设`：
 
 以下是函数定义。
 
-    #构建邻接矩阵
-    adjacencyMatrix<-function(pages){
-      n<-max(apply(pages,2,max))
-      A <- matrix(0,n,n)
-      for(i in 1:nrow(pages)) A[pages[i,]$dist,pages[i,]$src]<-1
-      A
-    }
+{% highlight ruby %}
+#构建邻接矩阵
+adjacencyMatrix<-function(pages){
+  n<-max(apply(pages,2,max))
+  A <- matrix(0,n,n)
+  for(i in 1:nrow(pages)) A[pages[i,]$dist,pages[i,]$src]<-1
+  A
+}
 
-    #变换概率矩阵
-    probabilityMatrix<-function(G){
-      # 按列相加
-      cs <- colSums(G)
-      cs[cs==0] <- 1
-      n <- nrow(G)
-      A <- matrix(0,nrow(G),ncol(G))
-      for (i in 1:n) A[i,] <- A[i,] + G[i,]/cs
-      A
-    }
+#变换概率矩阵
+probabilityMatrix<-function(G){
+  # 按列相加
+  cs <- colSums(G)
+  cs[cs==0] <- 1
+  n <- nrow(G)
+  A <- matrix(0,nrow(G),ncol(G))
+  for (i in 1:n) A[i,] <- A[i,] + G[i,]/cs
+  A
+}
 
-    #递归计算矩阵特征值。跟权重有关的
-    eigenMatrix<-function(G,iter=100){
-      # iter<-10
-      n<-nrow(G)
-      x <- rep(1,n)
-      # 迭代,x为每一轮计算的权重，也是pR值。
-      for (i in 1:iter) x <- G %*% x
-      x/sum(x)
-    }
+#递归计算矩阵特征值。跟权重有关的
+eigenMatrix<-function(G,iter=100){
+  # iter<-10
+  n<-nrow(G)
+  x <- rep(1,n)
+  # 迭代,x为每一轮计算的权重，也是pR值。
+  for (i in 1:iter) x <- G %*% x
+  x/sum(x)
+}
 
-    pages<-read.table(file="page.csv",header=FALSE,sep=",")
-    names(pages)<-c("src","dist");pages
+pages<-read.table(file="page.csv",header=FALSE,sep=",")
+names(pages)<-c("src","dist");pages
+{% endhighlight %}
 
 以下便开始执行程序。
 
-    > A<-adjacencyMatrix(pages);A
+{% highlight ruby %}
+> A<-adjacencyMatrix(pages);A
 
-                [,1] [,2] [,3] [,4]
-    [1,]    0    0    0    0
-    [2,]    1    0    0    1
-    [3,]    1    1    0    0
-    [4,]    1    1    1    0
+            [,1] [,2] [,3] [,4]
+[1,]    0    0    0    0
+[2,]    1    0    0    1
+[3,]    1    1    0    0
+[4,]    1    1    1    0
 
-    > G<-probabilityMatrix(A);G
+> G<-probabilityMatrix(A);G
 
-          [,1] [,2] [,3] [,4]
-    [1,] 0.0000000  0.0    0    0
-    [2,] 0.3333333  0.0    0    1
-    [3,] 0.3333333  0.5    0    0
-    [4,] 0.3333333  0.5    1    0
+      [,1] [,2] [,3] [,4]
+[1,] 0.0000000  0.0    0    0
+[2,] 0.3333333  0.0    0    1
+[3,] 0.3333333  0.5    0    0
+[4,] 0.3333333  0.5    1    0
 
-    > q<-eigenMatrix(G,10);q
+> q<-eigenMatrix(G,10);q
 
-        [,1]
-    [1,] 0.0000000
-    [2,] 0.4036458
-    [3,] 0.1979167
-    [4,] 0.3984375
-
+    [,1]
+[1,] 0.0000000
+[2,] 0.4036458
+[3,] 0.1979167
+[4,] 0.3984375
+{% endhighlight %}
 
 ### 2)包括考虑阻尼系统的情况
 
 dProbabilityMatrix是对于adjacencyMatrix函数的重构。
 
-    #变换概率矩阵,考虑d的情况
-    dProbabilityMatrix<-function(G,d=0.85){
-      cs <- colSums(G)
-      cs[cs==0] <- 1
-      n <- nrow(G)
-      # (1-d)/n
-      delta <- (1-d)/n
-      A <- matrix(delta,nrow(G),ncol(G))
-      for (i in 1:n) A[i,] <- A[i,] + d*G[i,]/cs
-      A
-    }
+{% highlight ruby %}
+#变换概率矩阵,考虑d的情况
+dProbabilityMatrix<-function(G,d=0.85){
+  cs <- colSums(G)
+  cs[cs==0] <- 1
+  n <- nrow(G)
+  # (1-d)/n
+  delta <- (1-d)/n
+  A <- matrix(delta,nrow(G),ncol(G))
+  for (i in 1:n) A[i,] <- A[i,] + d*G[i,]/cs
+  A
+}
 
-    > pages<-read.table(file="page.csv",header=FALSE,sep=",")
-    > names(pages)<-c("src","dist");pages
-    
-      src dist
-    1   1    2
-    2   1    3
-    3   1    4
-    4   2    3
-    5   2    4
-    6   3    4
-    7   4    2
+> pages<-read.table(file="page.csv",header=FALSE,sep=",")
+> names(pages)<-c("src","dist");pages
 
-    > A<-adjacencyMatrix(pages);A
-    
-          [,1] [,2] [,3] [,4]
-    [1,]    0    0    0    0
-    [2,]    1    0    0    1
-    [3,]    1    1    0    0
-    [4,]    1    1    1    0
+  src dist
+1   1    2
+2   1    3
+3   1    4
+4   2    3
+5   2    4
+6   3    4
+7   4    2
 
-    > G<-dProbabilityMatrix(A);G
-            [,1]   [,2]   [,3]   [,4]
-    [1,] 0.0375000 0.0375 0.0375 0.0375
-    [2,] 0.3208333 0.0375 0.0375 0.8875
-    [3,] 0.3208333 0.4625 0.0375 0.0375
-    [4,] 0.3208333 0.4625 0.8875 0.0375
+> A<-adjacencyMatrix(pages);A
 
-    > q<-eigenMatrix(G,100);q
-          [,1]
-    [1,] 0.0375000
-    [2,] 0.3738930
-    [3,] 0.2063759
-    [4,] 0.3822311
+      [,1] [,2] [,3] [,4]
+[1,]    0    0    0    0
+[2,]    1    0    0    1
+[3,]    1    1    0    0
+[4,]    1    1    1    0
+
+> G<-dProbabilityMatrix(A);G
+        [,1]   [,2]   [,3]   [,4]
+[1,] 0.0375000 0.0375 0.0375 0.0375
+[2,] 0.3208333 0.0375 0.0375 0.8875
+[3,] 0.3208333 0.4625 0.0375 0.0375
+[4,] 0.3208333 0.4625 0.8875 0.0375
+
+> q<-eigenMatrix(G,100);q
+      [,1]
+[1,] 0.0375000
+[2,] 0.3738930
+[3,] 0.2063759
+[4,] 0.3822311
+{% endhighlight %}
 
 增加阻尼系数后，ID=1的页面，就有值了PR(1)=(1-d)/n=(1-0.85)/4=0.0375，即无外链页面的最小值。
 
@@ -207,38 +212,39 @@ dProbabilityMatrix是对于adjacencyMatrix函数的重构。
 增加的函数：calcEigenMatrix
 用于直接计算矩阵特征值，可以有效地减少的循环的操作，提高程序运行效率。
 
-    #直接计算矩阵特征值.即特解
-    calcEigenMatrix<-function(G){
-      x <- Re(eigen(G)$vectors[,1])
-      x/sum(x)
-    }
+{% highlight ruby %}
+#直接计算矩阵特征值.即特解
+calcEigenMatrix<-function(G){
+  x <- Re(eigen(G)$vectors[,1])
+  x/sum(x)
+}
 
-    > pages<-read.table(file="page.csv",header=FALSE,sep=",")
-    > names(pages)<-c("src","dist");pages
-        src dist
-    1   1    2
-    2   1    3
-    3   1    4
-    4   2    3
-    5   2    4
-    6   3    4
-    7   4    2
+> pages<-read.table(file="page.csv",header=FALSE,sep=",")
+> names(pages)<-c("src","dist");pages
+    src dist
+1   1    2
+2   1    3
+3   1    4
+4   2    3
+5   2    4
+6   3    4
+7   4    2
 
-    > A<-adjacencyMatrix(pages);A
-          [,1] [,2] [,3] [,4]
-    [1,]    0    0    0    0
-    [2,]    1    0    0    1
-    [3,]    1    1    0    0
-    [4,]    1    1    1    0
+> A<-adjacencyMatrix(pages);A
+      [,1] [,2] [,3] [,4]
+[1,]    0    0    0    0
+[2,]    1    0    0    1
+[3,]    1    1    0    0
+[4,]    1    1    1    0
 
-    > G<-dProbabilityMatrix(A);G
-            [,1]   [,2]   [,3]   [,4]
-    [1,] 0.0375000 0.0375 0.0375 0.0375
-    [2,] 0.3208333 0.0375 0.0375 0.8875
-    [3,] 0.3208333 0.4625 0.0375 0.0375
-    [4,] 0.3208333 0.4625 0.8875 0.0375
+> G<-dProbabilityMatrix(A);G
+        [,1]   [,2]   [,3]   [,4]
+[1,] 0.0375000 0.0375 0.0375 0.0375
+[2,] 0.3208333 0.0375 0.0375 0.8875
+[3,] 0.3208333 0.4625 0.0375 0.0375
+[4,] 0.3208333 0.4625 0.8875 0.0375
 
-    > q<-calcEigenMatrix(G);q
-    [1] 0.0375000 0.3732476 0.2067552 0.3824972
-
+> q<-calcEigenMatrix(G);q
+[1] 0.0375000 0.3732476 0.2067552 0.3824972
+{% endhighlight %}
 

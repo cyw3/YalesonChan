@@ -40,70 +40,81 @@ author_site: https://github.com/cyw3
 
 跟上一篇文一样，我们需要准备好开发所需要的环境。就像学习一样，得要有个好的学习氛围嘛。
 
+{% highlight ruby %}
     win7系统
     RStudio编辑器
     qutke包
+{% endhighlight %}
 
 需要提前下载况客R语言Api，即qutke，[GitHub链接](https://github.com/qutke/qutke)
 可以安装注册git，通过git命令来下载相应的R包。
 
-	git clone https://github.com/qutke/qutke.git 
-
+{% highlight ruby %}
+git clone https://github.com/qutke/qutke.git 
+{% endhighlight %}
 
 也可以通过RStudio命令来下载：
 
+{% highlight ruby %}
 	library(devtools)
 	install_github('qutke/qutke')
+{% endhighlight %}
 
 2.初始化，弹药准备
 
-	#安装相应的需要使用的R包
-	library('lubridate')
-	library(qutke)
-	key<-'ff5ed58edf645c6581e8148db1130dc310fbab5fdccc4b2a9ea0be30f4128ace'
-	init(key)
+{% highlight ruby %}
+#安装相应的需要使用的R包
+library('lubridate')
+library(qutke)
+key<-'ff5ed58edf645c6581e8148db1130dc310fbab5fdccc4b2a9ea0be30f4128ace'
+init(key)
+{% endhighlight %}
 
 
 3.参数选定
 
 在制作走势图之前，我们得知道，是什么样的组合，什么时候买入的。这里，我参考了雪球里的一个热门组合“丁丁丁涨不停ZH078564”，分别是科大讯飞“002230.SZ"，以及登云股份“002715.SZ”。日期就选在“2015-10-01”吧。
 
-	qtid <- c('002230.SZ','002715.SZ')
-	date <- '2015-10-01'
+{% highlight ruby %}
+qtid <- c('002230.SZ','002715.SZ')
+date <- '2015-10-01'
+{% endhighlight %}
 
 
 4.获取股票基本信息
 
 依次获取这两支股票的从买入日期至今的每天的收盘价。
 
-	#股票基本信息
-	md <- getMD(data='keyMap',qtid=qtid,key=key)
-	#股票日间行情(前复权)
-	dailyQuote <- getDailyQuote(data='mktFwdDaily',qtid=qtid,startdate=date,enddate=Sys.Date(),key=key)
-	#当日收盘价(前复权)
-	stock1 <-dailyQuote[which(dailyQuote$qtid==qtid[1]),]
-	stock2 <-dailyQuote[which(dailyQuote$qtid==qtid[2]),]
-	#x轴，作为时间轴。取买入日期至今。
-	tradingDay <- getDate(data='tradingDay',startdate=stock1$date[1],enddate=Sys.Date(),key=key)
-
+{% highlight ruby %}
+#股票基本信息
+md <- getMD(data='keyMap',qtid=qtid,key=key)
+#股票日间行情(前复权)
+dailyQuote <- getDailyQuote(data='mktFwdDaily',qtid=qtid,startdate=date,enddate=Sys.Date(),key=key)
+#当日收盘价(前复权)
+stock1 <-dailyQuote[which(dailyQuote$qtid==qtid[1]),]
+stock2 <-dailyQuote[which(dailyQuote$qtid==qtid[2]),]
+#x轴，作为时间轴。取买入日期至今。
+tradingDay <- getDate(data='tradingDay',startdate=stock1$date[1],enddate=Sys.Date(),key=key)
+{% endhighlight %}
 
 5.数据处理，以备后面生成dataframe表格。此时，fwdAdjClose是每只股票在每一个交易日的收盘价。
 
-	#归一化
-	i <- 1
-	length <- length(tradingDay)
-	fwdAdjClose1 <- c()
-	fwdAdjClose2 <- c()
-	while(i<=length){
-	  fwdAdjClose1 <- c(fwdAdjClose1,stock1[i,]$fwdAdjClose)
-	  if(is.null(fwdAdjClose1[i])||is.na(fwdAdjClose1[i])) 
-	    fwdAdjClose1[i] <- fwdAdjClose1[i-1]
-	  fwdAdjClose2 <- c(fwdAdjClose2,stock2[i,]$fwdAdjClose)
-	  if(is.null(fwdAdjClose2[i])||is.na(fwdAdjClose2[i])) 
-	    fwdAdjClose2[i] <- fwdAdjClose2[i-1]
-	  i=i+1
-	}
-
+{% highlight ruby %}
+#归一化
+i <- 1
+length <- length(tradingDay)
+fwdAdjClose1 <- c()
+fwdAdjClose2 <- c()
+while(i<=length){
+  fwdAdjClose1 <- c(fwdAdjClose1,stock1[i,]$fwdAdjClose)
+  if(is.null(fwdAdjClose1[i])||is.na(fwdAdjClose1[i])) 
+    fwdAdjClose1[i] <- fwdAdjClose1[i-1]
+  fwdAdjClose2 <- c(fwdAdjClose2,stock2[i,]$fwdAdjClose)
+  if(is.null(fwdAdjClose2[i])||is.na(fwdAdjClose2[i])) 
+    fwdAdjClose2[i] <- fwdAdjClose2[i-1]
+  i=i+1
+}
+{% endhighlight %}
 
 6.收益率计算
 
@@ -111,65 +122,70 @@ author_site: https://github.com/cyw3
 
 某只股票收益率 = （当天的股价-买入价）/ 买入价 *100
 
-	#计算
-	fwdAdjClose1 <- (fwdAdjClose1-fwdAdjClose1[1])/fwdAdjClose1[1]*100
-	fwdAdjClose2 <- (fwdAdjClose2-fwdAdjClose2[1])/fwdAdjClose2[1]*100
+{% highlight ruby %}
+#计算
+fwdAdjClose1 <- (fwdAdjClose1-fwdAdjClose1[1])/fwdAdjClose1[1]*100
+fwdAdjClose2 <- (fwdAdjClose2-fwdAdjClose2[1])/fwdAdjClose2[1]*100
+{% endhighlight %}
 
 
 7.生成dataframe表格，并将数据发送到况客投研中心，以便后期处理
 
-	#形成dataframe
-	yieldChart <- data.frame('date'=tradingDay,'2'=fwdAdjClose1,'3'=fwdAdjClose2)
-	names(yieldChart)<-c('日期',md[1,]$ChiAbbr,md[2,]$ChiAbbr)
-	postData(yieldChart,name='yieldChart',key=key)
-
+{% highlight ruby %}
+#形成dataframe
+yieldChart <- data.frame('date'=tradingDay,'2'=fwdAdjClose1,'3'=fwdAdjClose2)
+names(yieldChart)<-c('日期',md[1,]$ChiAbbr,md[2,]$ChiAbbr)
+postData(yieldChart,name='yieldChart',key=key)
+{% endhighlight %}
 
 8.代码优化
 
 当然，我们不能就这满足了。我们需要在对代码略微修改，使之只需要我们输入交易日期、股票组合，就可以自动生成需要的收益率走势图。
 
-	getYieldChart<-function(date,qtid=c(),key){
-	  if(length(qtid)<=0){
-	    stop("Qtid is more than one.")
-	  }
-	  #股票基本信息
-	  md <- getMD(data='keyMap',qtid=qtid,key=key)
-	  #股票日间行情(前复权)
-	  dailyQuote <- getDailyQuote(data='mktFwdDaily',qtid=qtid,startdate=date,enddate=Sys.Date(),key=key)
-	  #当日收盘价(前复权)
-	  stock <- list()
-	  qtidlength <- length(qtid)
-	  i <- 1
-	  while(i<=qtidlength){
-	    ChiAbbr <- md[i,]$ChiAbbr
-	    qtidSt <- md[i,]$qtid
-	    stock[[ChiAbbr]] <- dailyQuote[which(dailyQuote$qtid==qtidSt),]
-	    i <- i+1
-	  }
-	  #x轴，作为时间轴。取买入日期至今。
-	  tradingDay <- getDate(data='tradingDay',startdate=stock[[1]]$date[1],enddate=Sys.Date(),key=key)
-	  fwdAdjClose <- list()
-	  fwdAdjClose[['date']] <- tradingDay
-	  #归一化
-	  i <- 1
-	  length <- length(tradingDay)
-	  while(i<=qtidlength){
-	    ChiAbbr <- md[i,]$ChiAbbr
-	    j <- 1
-	    while(j<=length){
-	      fwdAdjClose[[ChiAbbr]] <- c(fwdAdjClose[[ChiAbbr]],stock[[ChiAbbr]][j,]$fwdAdjClose)
-	      if(is.null(fwdAdjClose[[ChiAbbr]][j])||is.na(fwdAdjClose[[ChiAbbr]][j])) 
-	        fwdAdjClose[[ChiAbbr]][j] <- fwdAdjClose[[ChiAbbr]][j-1]
-	      j <- j+1
-	    }
-	    #计算
-	    fwdAdjClose[[ChiAbbr]] <- (fwdAdjClose[[ChiAbbr]]-fwdAdjClose[[ChiAbbr]][1])/fwdAdjClose[[ChiAbbr]][1]*100
-	    i=i+1
-	  }
-	  #形成dataframe
-	  yieldChart <-data.frame(fwdAdjClose)
-	  postData(yieldChart,name='yieldChart',key=key)
-	} 
+{% highlight ruby %}
+getYieldChart<-function(date,qtid=c(),key){
+  if(length(qtid)<=0){
+    stop("Qtid is more than one.")
+  }
+  #股票基本信息
+  md <- getMD(data='keyMap',qtid=qtid,key=key)
+  #股票日间行情(前复权)
+  dailyQuote <- getDailyQuote(data='mktFwdDaily',qtid=qtid,startdate=date,enddate=Sys.Date(),key=key)
+  #当日收盘价(前复权)
+  stock <- list()
+  qtidlength <- length(qtid)
+  i <- 1
+  while(i<=qtidlength){
+    ChiAbbr <- md[i,]$ChiAbbr
+    qtidSt <- md[i,]$qtid
+    stock[[ChiAbbr]] <- dailyQuote[which(dailyQuote$qtid==qtidSt),]
+    i <- i+1
+  }
+  #x轴，作为时间轴。取买入日期至今。
+  tradingDay <- getDate(data='tradingDay',startdate=stock[[1]]$date[1],enddate=Sys.Date(),key=key)
+  fwdAdjClose <- list()
+  fwdAdjClose[['date']] <- tradingDay
+  #归一化
+  i <- 1
+  length <- length(tradingDay)
+  while(i<=qtidlength){
+    ChiAbbr <- md[i,]$ChiAbbr
+    j <- 1
+    while(j<=length){
+      fwdAdjClose[[ChiAbbr]] <- c(fwdAdjClose[[ChiAbbr]],stock[[ChiAbbr]][j,]$fwdAdjClose)
+      if(is.null(fwdAdjClose[[ChiAbbr]][j])||is.na(fwdAdjClose[[ChiAbbr]][j])) 
+        fwdAdjClose[[ChiAbbr]][j] <- fwdAdjClose[[ChiAbbr]][j-1]
+      j <- j+1
+    }
+    #计算
+    fwdAdjClose[[ChiAbbr]] <- (fwdAdjClose[[ChiAbbr]]-fwdAdjClose[[ChiAbbr]][1])/fwdAdjClose[[ChiAbbr]][1]*100
+    i=i+1
+  }
+  #形成dataframe
+  yieldChart <-data.frame(fwdAdjClose)
+  postData(yieldChart,name='yieldChart',key=key)
+} 
+{% endhighlight %}
 
 
 这样，就算完成了。（满意脸）
