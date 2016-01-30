@@ -217,6 +217,8 @@ public class GaussianBlur {
 {% endhighlight %}
 
 
+再来个wiki上面的例子吧，大家可以巩固一下：
 
+[![GSexample]({{site.baseurl}}/img/GSexample.png)](https://zh.wikipedia.org/wiki/%E9%AB%98%E6%96%AF%E6%A8%A1%E7%B3%8A#.E9.AB.98.E6.96.AF.E7.9F.A9.E9.98.B5.E7.A4.BA.E4.BE.8B)
 
 
