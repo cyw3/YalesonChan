@@ -91,11 +91,11 @@ author_site: https://github.com/cyw3
 
 为了计算权重矩阵，需要设定σ的值。假定σ=1.5，分别将这个九宫格中的各个点的坐标代入上面的二维高斯函数计算公式，求出各自的G(x,y).则模糊半径为1的权重矩阵如下：
 
-![gs6]({{site.baseurl}}/img/hs6.png)
+![gs6]({{site.baseurl}}/img/gs6.png)
 
 这9个点的权重总和等于0.4787147，如果只计算这9个点的加权平均，还必须让它们的权重之和等于1，因此上面9个值还要分别除以0.4787147，得到最终的权重矩阵。
 
-![gs7]({{site.baseurl}}/img/ga7.png)
+![gs7]({{site.baseurl}}/img/gs7.png)
 
 
 2）计算高斯模糊
