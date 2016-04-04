@@ -5,8 +5,7 @@ profile_picture: http://www.famousbirthdays.com/faces/laurel-stan-image.jpg
 short_bio: If anyone at my funeral has a long face, I'll never speak to him again.
 author_site: https://github.com/cyw3
 ---
-
-​## 前言
+## 前言
 
 Activity是Android组件中最基本也是最为常见用的四大组件（Activity，Service服务,Content Provider内容提供者，BroadcastReceiver广播接收器）之一。Activity是一个应用程序组件，提供一个屏幕，用户可以用来交互为了完成某项任务。在一个Android应用中，一个Activity通常就是一个单独的屏幕，它上面可以显示一些控件也可以监听并处理用户的事件做出响应。
 
@@ -61,21 +60,21 @@ onCreate()——>onStart()——>onResume()
 
 在实现 Activity 类的时候，通过覆盖（ override ）这些方法即可在你需要处理的时候来调用。
 
-1. onCreate ：当活动第一次启动的时候，触发该方法，可以在此时完成活动的初始化工作。 onCreate 方法有一个参数，该参数可以为空( null )，也可以是之前调用 onSaveInstanceState()方法保存到存储设备中的数据。
+1、onCreate ：当活动第一次启动的时候，触发该方法，可以在此时完成活动的初始化工作。 onCreate 方法有一个参数，该参数可以为空( null )，也可以是之前调用 onSaveInstanceState()方法保存到存储设备中的数据。
 
-2. onStart ：该方法在 onCreate() 方法之后被调用，或者在 Activity 从 Stop 状态转换为 Active 状态时被调用。该方法的触发表示所属活动将被展现给用户。
+2、onStart ：该方法在 onCreate() 方法之后被调用，或者在 Activity 从 Stop 状态转换为 Active 状态时被调用。该方法的触发表示所属活动将被展现给用户。
 
-3. onResume ：当一个活动和用户发生交互的时候，触发该方法。在 Activity 从 Pause 状态转换到 Active 状态时被调用。
+3、onResume ：当一个活动和用户发生交互的时候，触发该方法。在 Activity 从 Pause 状态转换到 Active 状态时被调用。
 
-4. onPause ：当一个正在前台运行的活动因为其他的活动需要前台运行而转入后台运行的时候，触发该方法。这时候需要将活动的状态持久化，比如正在编辑的数据库记录等。
+4、onPause ：当一个正在前台运行的活动因为其他的活动需要前台运行而转入后台运行的时候，触发该方法。这时候需要将活动的状态持久化，比如正在编辑的数据库记录等。
 
-5. onStop ：当一个活动不再需要展示给用户的时候，触发该方法。如果内存紧张，系统会直接结束这个活动，而不会触发 onStop 方法。 所以保存状态信息是应该在onPause时做，而不是onStop时做。活动如果没有在前台运行，都将被停止或者Linux管理进程为了给新的活动预留足够的存储空间而随时结束这些活动。因此对于开发者来说，在设计应用程序的时候，必须时刻牢记这一原则。在一些情况下，onPause方法或许是活动触发的最后的方法，因此开发者需要在这个时候保存需要保存的信息。
+5、onStop：当一个活动不再需要展示给用户的时候，触发该方法。如果内存紧张，系统会直接结束这个活动，而不会触发 onStop 方法。 所以保存状态信息是应该在onPause时做，而不是onStop时做。活动如果没有在前台运行，都将被停止或者Linux管理进程为了给新的活动预留足够的存储空间而随时结束这些活动。因此对于开发者来说，在设计应用程序的时候，必须时刻牢记这一原则。在一些情况下，onPause方法或许是活动触发的最后的方法，因此开发者需要在这个时候保存需要保存的信息。
 
-6. onRestart ：当处于停止状态的活动需要再次展现给用户的时候，触发该方法。
+6、onRestart ：当处于停止状态的活动需要再次展现给用户的时候，触发该方法。
 
-7. onDestroy ：当活动销毁的时候，触发该方法。和onStop方法一样，如果内存紧张，系统会直接结束这个活动而不会触发该方法。
+7、onDestroy ：当活动销毁的时候，触发该方法。和onStop方法一样，如果内存紧张，系统会直接结束这个活动而不会触发该方法。
 
-8. onSaveInstanceState ：系统调用该方法，允许活动保存之前的状态，比如说在一串字符串中的光标所处的位置等。 通常情况下，开发者不需要重写覆盖该方法，在默认的实现中，已经提供了自动保存活动所涉及到的用户界面组件的所有状态信息。
+8、onSaveInstanceState ：系统调用该方法，允许活动保存之前的状态，比如说在一串字符串中的光标所处的位置等。 通常情况下，开发者不需要重写覆盖该方法，在默认的实现中，已经提供了自动保存活动所涉及到的用户界面组件的所有状态信息。
 
 ## 三、Activity栈
 
@@ -95,13 +94,13 @@ Android 是通过一种 Activity 栈的方式来管理 Activity 的，一个 Act
 
 在Android里，有4种Activity的启动模式，分别为：
 
-1. 标准模式standard：一调用startActivity()方法就会产生一个新的实例。
+1、标准模式standard：一调用startActivity()方法就会产生一个新的实例。
 
-2. singleTop:如果已经有一个实例位于Activity栈的顶部时，就不产生新的实例，而只是调用Activity中的newInstance()方法。如果不位于栈顶，会产生一个新的实例。
+2、singleTop:如果已经有一个实例位于Activity栈的顶部时，就不产生新的实例，而只是调用Activity中的newInstance()方法。如果不位于栈顶，会产生一个新的实例。
 
-3. singleTask: 会在一个新的task中产生这个实例，以后每次调用都会使用这个，不会去产生新的实例了。
+3、singleTask: 会在一个新的task中产生这个实例，以后每次调用都会使用这个，不会去产生新的实例了。
 
-4. singleInstance: 这个跟singleTask基本上是一样，只有一个区别：在这个模式下的Activity实例所处的task中，只能有这个activity实例，不能有其他的实例。
+4、singleInstance: 这个跟singleTask基本上是一样，只有一个区别：在这个模式下的Activity实例所处的task中，只能有这个activity实例，不能有其他的实例。
 
 这些启动模式可以在功能清单文件AndroidManifest.xml中的launchMode属性进行设置。
 
@@ -115,14 +114,14 @@ Android 是通过一种 Activity 栈的方式来管理 Activity 的，一个 Act
 
 四种加载模式的区别:
 
-1. 所属task的区别
+1、所属task的区别
 
 一般情况下，standard和singleTop的Activity的目标task，和收到的Intent的发送者在同一个task内，就相当于谁调用它，它就跟谁在同一个Task中。
 
 除非Intent包括参数FLAG_ACTIVITY_NEW_TASK。如果提供了FLAG_ACTIVITY_NEW_TASK参数，会启动到别的task里。
 singleTask和singleInstance总是把要启动的Activity作为一个task的根元素，他们不会被启动到一个其他task里。
 
-2. 是否允许多个实例
+2、是否允许多个实例
 
 standard和singleTop可以被实例化多次，并且是可以存在于不同的task中。这种实例化时一个task可以包括一个activity的多个实例。
 
@@ -130,7 +129,7 @@ singleTask和singleInstance则限制只生成一个实例，并且是task的根�
 
 singleTop 要求在创建intent的时候，如果栈顶已经有要创建的Activity的实例，则将intent发送给该实例，而不创建新的实例。
 
-3. 是否允许其它Activity存在于本task内
+3、是否允许其它Activity存在于本task内
 
 singleInstance独占一个task，其它Activity不能存在那个task里。
 
@@ -138,7 +137,7 @@ singleInstance独占一个task，其它Activity不能存在那个task里。
 
 而另外三种模式，则可以和其它activity共存。
 
-4. 是否每次都生成新实例
+4、是否每次都生成新实例
 
 standard对于每一个启动Intent都会生成一个activity的新实例。
 
@@ -156,7 +155,7 @@ singleTask如果在栈顶，则接受intent，否则，该intent会被丢弃，�
 
 在 Android 中，不同的Activity实例可能运行在一个进程中，也可能运行在不同的进程中。因此我们需要一种特别的机制帮助我们在 Activity 之间传递消息。
 
-1. 使用 Intent 通信
+1、使用 Intent 通信
 
 Android 中通过 Intent 对象来表示一条消息，一个 Intent 对象不仅包含有这个消息的目的地，还可以包含消息的内容，这好比一封 Email，其中不仅应该包含收件地址，还可以包含具体的内容。对于一个 Intent 对象，消息“目的地”是必须的，而内容则是可选项。
 
@@ -198,7 +197,7 @@ Android 中通过 Intent 对象来表示一条消息，一个 Intent 对象不�
  intent.getStringExtra("string_key");
 {% endhighlight %}
 
-2. 使用 SharedPreferences
+2、使用 SharedPreferences
 
 SharedPreferences 使用 xml 格式为 Android 应用提供一种永久的数据存贮方式。对于一个 Android 应用，它存贮在文件系统的 /data/ data/your_app_package_name/shared_prefs/目录下，可以被处在同一个应用中的所有 Activity 访问。Android 提供了相关的 API 来处理这些数据而不需要程序员直接操作这些文件或者考虑数据同步问题。
 
@@ -216,7 +215,7 @@ SharedPreferences 使用 xml 格式为 Android 应用提供一种永久的数据
  preferences.getString("string_key", "default_value");
 {% endhighlight %}
 
-3.其它方式
+3、其它方式
 
 Android 提供了包括 SharedPreferences 在内的很多种数据存贮方式，比如 SQLite，文件等，程序员可以通过这些 API 实现 Activity 之间的数据交换。如果必要，我们还可以使用 IPC 方式。
 
@@ -228,7 +227,7 @@ Intent Filter 描述了一个组件愿意接收什么样的 Intent 对象，Andr
 
 ![ActivityIntentFilter.jpg]({{site.baseurl}}/img/ActivityIntentFilter.jpg)
 
-1. Action 匹配
+1、Action 匹配
 Action 是一个用户定义的字符串，用于描述一个 Android 应用程序组件，一个 Intent Filter 可以包含多个 Action。在 AndroidManifest.xml 的 Activity 定义时可以在其 <intent-filter >节点指定一个 Action 列表用于标示 Activity 所能接受的“动作”，例如：
 
 {% highlight ruby %}
@@ -249,7 +248,7 @@ Action 是一个用户定义的字符串，用于描述一个 Android 应用程�
 那么所有的 Action 列表中包含了“com.cyw.myaction”的 Activity 都将会匹配成功。
 Android 预定义了一系列的 Action 分别表示特定的系统动作。这些 Action 通过常量的方式定义在 android.content. Intent中，以“ACTION_”开头。我们可以在 Android 提供的文档中找到它们的详细说明。
 
-2.URI 数据匹配
+2、URI 数据匹配
 
 一个 Intent 可以通过 URI 携带外部数据给目标组件。在 <intent-filter >节点中，通过 <data/>节点匹配外部数据。
 mimeType 属性指定携带外部数据的数据类型，scheme 指定协议，host、port、path 指定数据的位置、端口、和路径。如下：
@@ -261,5 +260,5 @@ mimeType 属性指定携带外部数据的数据类型，scheme 指定协议，h
 
 如果在 Intent Filter 中指定了这些属性，那么只有所有的属性都匹配成功时 URI 数据匹配才会成功。
 
-3.Category 类别匹配
+3、Category 类别匹配
 <intent-filter >节点中可以为组件定义一个 Category 类别列表，当 Intent 中包含这个列表的所有项目时 Category 类别匹配才会成功。
