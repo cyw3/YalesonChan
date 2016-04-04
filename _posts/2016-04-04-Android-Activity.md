@@ -7,7 +7,7 @@ author_site: https://github.com/cyw3
 ---
 ## 前言
 
-Activity是Android组件中最基本也是最为常见用的四大组件（Activity，Service服务,Content Provider内容提供者，BroadcastReceiver广播接收器）之一。Activity是一个应用程序组件，提供一个屏幕，用户可以用来交互为了完成某项任务。在一个Android应用中，一个Activity通常就是一个单独的屏幕，它上面可以显示一些控件也可以监听并处理用户的事件做出响应。
+Activity是Android组件中最基本也是最为常见用的[四大组件](http://www.cnblogs.com/pepcod/archive/2013/02/11/2937403.html)（Activity，Service服务,Content Provider内容提供者，BroadcastReceiver广播接收器）之一。Activity是一个应用程序组件，提供一个屏幕，用户可以用来交互为了完成某项任务。在一个Android应用中，一个Activity通常就是一个单独的屏幕，它上面可以显示一些控件也可以监听并处理用户的事件做出响应。
 
 ## 目录
 
