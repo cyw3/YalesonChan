@@ -11,7 +11,7 @@ Broadcast Receiver是Android组件中最基本也是最为常见用的四大组�
 
 Broadcast Receiver，广播接收者，顾名思义，是用来接收来自系统和应用中的广播。这种组件本质上是一种全局的监听器，用于监听系统全局的广播消息。
 
-##目录
+## 目录
 
 1.Broadcast Receiver的生命周期
 2.Broadcast的类型
@@ -42,7 +42,7 @@ Ordered broadcasts（有序广播）：Ordered broadcasts的接收者按照一�
 
 注册有两种方式：
 
-1. 静态注册：这种方法是在配置AndroidManifest.xml配置文件中的application里面定义receiver并设置要接收的action。通过这种方式注册的广播为常驻型广播，也就是说如果应用程序关闭了，有相应事件触发，程序还是会被系统自动调用运行。如：
+1、静态注册：这种方法是在配置AndroidManifest.xml配置文件中的application里面定义receiver并设置要接收的action。通过这种方式注册的广播为常驻型广播，也就是说如果应用程序关闭了，有相应事件触发，程序还是会被系统自动调用运行。如：
 
 {% highlight ruby %}
 <!-- 在配置文件中注册BroadcastReceiver能够匹配的Intent -->
@@ -54,7 +54,7 @@ Ordered broadcasts（有序广播）：Ordered broadcasts的接收者按照一�
 </receiver>
 {% endhighlight %}
 
-2. 动态注册：这种方法是通过代码在.Java文件中进行注册。通过这种方式注册的广播为非常驻型广播，即它会跟随Activity的生命周期，所以在Activity结束前我们需要调用unregisterReceiver(receiver)方法移除它，否则会报异常。
+2、动态注册：这种方法是通过代码在.Java文件中进行注册。通过这种方式注册的广播为非常驻型广播，即它会跟随Activity的生命周期，所以在Activity结束前我们需要调用unregisterReceiver(receiver)方法移除它，否则会报异常。
 
 {% highlight ruby %}
 //通过代码的方式动态注册MyBroadcastReceiver
@@ -69,11 +69,11 @@ registerReceiver(receiver, filter);
 
 ## 四、Broadcast Receiver的使用步骤
 
-1. 创建BroadcastReceiver的子类
+1、创建BroadcastReceiver的子类
 
 由于BroadcastReceiver本质上是一种监听器，所以创建BroadcastReceiver的方法也非常简单，只需要创建一个BroadcastReceiver的子类然后重写onReceive (Context context, Intentintent)方法即可。
 
-2.注册BroadcastReceiver
+2、注册BroadcastReceiver
 
 一旦实现了BroadcastReceiver，接下就应该指定该BroadcastReceiver能匹配的Intent即注册BroadcastReceiver。
 
