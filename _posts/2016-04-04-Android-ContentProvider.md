@@ -47,17 +47,16 @@ Android提供了一些主要数据类型的ContentProvider，比如音频、视�
 
 主要方法：
 
+{% highlight ruby %}
 public boolean onCreate() 在创建ContentProvider时调用；
-
 public Cursor query(Uri, String[], String, String[], String) 用于查询指定Uri的ContentProvider，返回一个Cursor；
-
 public Uri insert(Uri, ContentValues) 用于添加数据到指定Uri的ContentProvider中；
-
 public int update(Uri, ContentValues, String, String[]) 用于更新指定Uri的ContentProvider中的数据；
-
 public int delete(Uri, String, String[]) 用于从指定Uri的ContentProvider中删除数据；
-
 public String getType(Uri) 用于返回指定的Uri中的数据的MIME类型。
+{% endhighlight %}
+
+> public String getType(Uri) 用于返回指定的Uri中的数据的MIME类型
 
 1）如果操作的数据属于集合类型，那么MIME类型字符串应该以vnd.android.cursor.dir/开头。
 
@@ -75,13 +74,12 @@ public String getType(Uri) 用于返回指定的Uri中的数据的MIME类型。
 
 ContentResolver提供的方法和ContentProvider提供的方法对应的有以下几个方法。
 
+{% highlight ruby %}
 public Uri insert(Uri uri, ContentValues values) 用于添加数据到指定Uri的ContentProvider中；
-
 public int delete(Uri uri, String selection, String[] selectionArgs) 用于从指定Uri的ContentProvider中删除数据；
-
 public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) 用于更新指定Uri的ContentProvider中的数据；
-
 public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) 用于查询指定Uri的ContentProvider。
+{% endhighlight %}
 
 3、Uri解析类
 
@@ -142,6 +140,7 @@ long personid = ContentUris.parseId(uri);//获取的结果为:10
 
 2、需要在AndroidManifest.xml使用<provider>对该ContentProvider进行配置，为了能让其他应用找到该ContentProvider ，ContentProvider采用了authorities（主机名/域名）对它进行唯一标识，你可以把ContentProvider看作是一个网站，authorities 就是域名。
 ​
+
 ## 四、监听ContentProvider中数据的变化
 
 1、如果ContentProvider的访问者需要知道ContentProvider中的数据发生变化，可以在ContentProvider发生数据变化时调用getContentResolver().notifyChange(uri, null)来通知注册在此URI上的访问者，例子如下：
