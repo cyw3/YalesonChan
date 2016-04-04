@@ -121,15 +121,15 @@ switch (sMatcher.match(Uri.parse("content://com.cyw.provider.personprovider/pers
 1、withAppendedId(uri, id)用于为路径加上ID部分：
 
 {% highlight ruby %}
-Uri uri = Uri.parse("content://com.ljq.provider.personprovider/person")
+Uri uri = Uri.parse("content://com.cyw.provider.personprovider/person")
 Uri resultUri = ContentUris.withAppendedId(uri, 10); 
-//生成后的Uri为：content://com.ljq.provider.personprovider/person/10
+//生成后的Uri为：content://com.cyw.provider.personprovider/person/10
 {% endhighlight %}
 
 2、parseId(uri)方法用于从路径中获取ID部分：
 
 {% highlight ruby %}
-Uri uri = Uri.parse("content://com.ljq.provider.personprovider/person/10")
+Uri uri = Uri.parse("content://com.cyw.provider.personprovider/person/10")
 long personid = ContentUris.parseId(uri);//获取的结果为:10
 {% endhighlight %}
 
