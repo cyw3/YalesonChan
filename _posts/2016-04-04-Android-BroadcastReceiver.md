@@ -13,10 +13,10 @@ Broadcast Receiver，广播接收者，顾名思义，是用来接收来自系�
 
 ## 目录
 
-1.Broadcast Receiver的生命周期
-2.Broadcast的类型
-3.Broadcast Receiver的注册方式
-4.Broadcast Receiver的使用步骤
+1. Broadcast Receiver的生命周期
+2. Broadcast的类型
+3. Broadcast Receiver的注册方式
+4. Broadcast Receiver的使用步骤
 
 ## 一、Broadcast Receiver的生命周期
 
