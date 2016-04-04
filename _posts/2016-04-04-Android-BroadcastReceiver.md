@@ -9,7 +9,7 @@ author_site: https://github.com/cyw3
 
 Broadcast Receiver是Android组件中最基本也是最为常见用的四大组件之一。
 
-Broadcast Receiver，广播接收者，顾名思义，是用来接收来自系统和应用中的广播。这种组件本质上是一种全局的监听器，用于监听系统全局的广播消息。
+Broadcast Receiver，[广播接收者](http://blog.csdn.net/liuhe688/article/details/6955668)，顾名思义，是用来接收来自系统和应用中的广播。这种组件本质上是一种全局的监听器，用于监听系统全局的广播消息。
 
 ## 目录
 
