@@ -13,7 +13,7 @@ service可以在和多场合的应用中使用，比如播放多媒体的时候�
 
 Service是在一段不定的时间运行在后台，不和用户交互应用组件。每个Service必须在manifest中通过<service>来声明。可以通过contect.startservice和contect.bindserverice来启动。
 
-Service和其他的应用组件一样，运行在进程的主线程中。这就是说如果service需要很多耗时或者阻塞的操作，需要在其子线程中实现。
+[Service](http://www.cnblogs.com/newcj/archive/2011/05/30/2061370.html)和其他的应用组件一样，运行在进程的主线程中。这就是说如果service需要很多耗时或者阻塞的操作，需要在其子线程中实现。
 
 ## 目录
 
