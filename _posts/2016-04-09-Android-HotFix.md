@@ -194,7 +194,7 @@ Android是使用这个类作为其系统类和应用类的加载器,只能去加
 {% highlight ruby %}
 	//BaseDexClassLoader:  
 	@Override  
-	protected Class<?> findClass(String name) throws ClassNotFoundException {  
+	protected Class< ?> findClass(String name) throws ClassNotFoundException {  
 	    List<Throwable> suppressedExceptions = new ArrayList<Throwable>(); 
 	    Class c = pathList.findClass(name, suppressedExceptions);  
 	    if (c == null) {  
