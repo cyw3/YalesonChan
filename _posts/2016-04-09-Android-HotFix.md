@@ -74,7 +74,7 @@ declaredClass就是所hook方法所在的类，对应的object。slot是Method�
 另外，在method结构体中有
 
 {% highlight ruby %}
-1.	method->insns = (const u2*) hookInfo;
+	method->insns = (const u2*) hookInfo;
 {% endhighlight %}
 
 用insns指向替换成为的方法，以便hookedMethodCallback可以获取真正期望执行的java方法。
@@ -284,9 +284,9 @@ BaseDexClassLoader中有个pathList对象，pathList中包含一个DexFile的集
 总结下，其实我们需要做的就是两件事：
 
 1、动态改变BaseDexClassLoader对象间接引用的dexElements；
+
 2、在app打包的时候，阻止相关类去打上CLASS_ISPREVERIFIED标志。所有与该类相关的类都需要进行动态注入，可进行修改，也是需要进行fix的对象。
 
- 
 ## 四、三种方案的比较
 
 1. Dexposed方法生成补丁难度较大，需要反射写混淆后的代码，粒度太细，如果替换方法很多的话，工作量巨大。
