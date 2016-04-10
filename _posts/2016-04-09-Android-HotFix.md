@@ -14,7 +14,7 @@ author_site: https://github.com/cyw3
 
 虽然Android系统并没有提供这个技术，但是很幸运的告诉大家，答案是：可以，热补丁动态修复技术可以解决以上这些问题。
 
-对于热修复方案，当前市场有四种解决方案，分别是 Dexposed、AndFix、ClassLoader、Proxy/Delegate。前两个是阿里开源的框架，第三个是QQ空间团队想出的对策。在我看来，前两个方案的思路是极其相似的，都是想要通过指针替换掉出Bug的方法、类，不同的是Dexposed将需要替换的方法连接到hookedMethodCallback，以他来实现替换后方法的调配，而AndFix就比较简洁粗暴了，直接就是获取需要替换的方法指针，将指针指向修改之后的新的java代码；相比之下，ClassLoader方案便较为巧妙的多了，他巧妙利用了BaseDexClassLoader的机制，类似于dex分包技术。Proxy/Delegate的方案则是使用ProxyApplication动态加载主程序dex。
+对于热修复方案，当前市场有四种解决方案，分别是 Xposed、AndFix、ClassLoader、Proxy/Delegate。前两个是阿里开源的框架，第三个是QQ空间团队想出的对策。在我看来，前两个方案的思路是极其相似的，都是想要通过指针替换掉出Bug的方法、类，不同的是Xposed将需要替换的方法连接到hookedMethodCallback，以他来实现替换后方法的调配，而AndFix就比较简洁粗暴了，直接就是获取需要替换的方法指针，将指针指向修改之后的新的java代码；相比之下，ClassLoader方案便较为巧妙的多了，他巧妙利用了BaseDexClassLoader的机制，类似于dex分包技术。Proxy/Delegate的方案则是使用ProxyApplication动态加载主程序dex。
 
 ## 目录
 
@@ -51,7 +51,7 @@ handleHookedMethod这个方法类似于一个统一调度的Dispatch任务分派
 
 那么，hook的具体过程是：
 
-1、首先通过DexClassload（这个会在ClassLoader部分具体说明）来加载所要hook的方法，分析类后，进c++层，拿到要hook的Method类，然后在handleHookedMethod中，通过dvmslotTomethod方法获取所要替换的Method*指针。
+1、首先通过DexClassloader（这个会在ClassLoader部分具体说明）来加载所要hook的方法，分析类后，进c++层，拿到要hook的Method类，然后在handleHookedMethod中，通过dvmslotTomethod方法获取所要替换的Method*指针。
 
 {% highlight ruby %}
 	Method* method = dvmSlotToMethod(declaredClass, slot);
