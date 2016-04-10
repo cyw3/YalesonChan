@@ -317,7 +317,7 @@ BaseDexClassLoader中有个pathList对象，pathList中包含一个DexFile的集
 
 相比而言，ClassLoader方案较为可靠，但是如果Dex文件较为庞大，启动速度会变慢；而AndFix则适用于应用不重启即可修复，且方法够简单；Xposed方案较为复杂，暂不考虑。
 
-## 六、基于以上三种方案的开源框架以及比较
+## 六、基于以上四种方案的开源框架以及比较
 
 1、Dexpost：
 
