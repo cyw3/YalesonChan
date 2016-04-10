@@ -18,14 +18,14 @@ author_site: https://github.com/cyw3
 
 ## 目录
 
-1. Dexposed
+1. Xposed
 2. AndFix
 3. ClassLoader
-4. 三种方案的比较
+4. 基于Proxy/Delegate
+5. 四种方案的比较
+6. 基于以上四种方案的开源框架以及比较
 
-## 一、Dexposed
-
-Dexposed是基于Xposed框架开发的一个热修复方案。并且完美继承了Xposed的精髓。
+## 一、Xposed
 
 大体上的原理是：
 
@@ -80,12 +80,19 @@ declaredClass就是所hook方法所在的类，对应的object。slot是Method�
 用insns指向替换成为的方法，以便hookedMethodCallback可以获取真正期望执行的java方法。
 现在所有被hook的方法，都指向了hookedMethodCallbackc方法中，然后在此方法中实现调用替换成为的java方法。
 
-3、优缺点
+3、优点
+
+1）无需重启就可以达到修复bug的目的
+
+2）多个模块可同时进行安装
+
+3）无需修改任何的APK
+
+4、缺点
 
 1）需要Android 的root权限
+
 2）Dexposed不支持Art模式（5.0+），且写补丁有点困难，需要反射写混淆后的代码，粒度太细，要替换的方法多的话，工作量会比较大。
-3) 无需修改任何的APK
-4) 多个模块可同时进行安装
  
 ## 二、AndFix
 
@@ -135,7 +142,7 @@ AndFix，我觉得是阿里开源的自动化程度比较高的热修复框架�
 	}
 {% endhighlight %}
 
-2、优缺点
+2、优点
 
 1）可以多次打补丁。如果本地保存了多个补丁，那么AndFix会按照补丁生成的时间顺序加载补丁。具体是根据.apatch文件中的PATCH.MF的字段Created-Time。
 
@@ -145,20 +152,13 @@ readme提示开发者需要验证下载过来的apatch文件的签名是否就�
 但是我看到AndFix已经做了验证，如果补丁文件的证书和当前apk的证书不是同一个的话，就不能加载补丁。
 官网还有一条，提示需要验证optimize file的指纹，应该是为了防止有人替换掉本地保存的补丁文件，所以要验证MD5码，然而SecurityChecker类里面也已经做了这个工作。。但是这个MD5码是保存在sharedpreference里面，如果手机已经root那么还是可以被访问的。
 
-3）局限性
+3）不需要重启APP即可应用补丁。
+
+3、缺点
 •	不支持YunOS
 •	无法添加新类和新的字段
 •	需要使用加固前的apk制作补丁，但是补丁文件很容易被反编译，也就是修改过的类源码容易泄露。
 •	使用加固平台可能会使热补丁功能失效（看到有人在360加固提了这个问题，自己还未验证）。
-
-4）与Nuwa对比
-Nuwa是另一个热补丁框架，原理是基于QQ空间团队提出的安卓App热补丁动态修复技术介绍。
-
-与Nuwa相比，AndFix有一下优点：
-•	不需要重启APP即可应用补丁。
-•	安全性更好，Nuwa后面的版本应该也会加上安全方面的内容。
-
-但是也有缺点
 •	无法添加类和字段
 
 ## 三、ClassLoader
@@ -287,17 +287,100 @@ BaseDexClassLoader中有个pathList对象，pathList中包含一个DexFile的集
 
 2、在app打包的时候，阻止相关类去打上CLASS_ISPREVERIFIED标志。所有与该类相关的类都需要进行动态注入，可进行修改，也是需要进行fix的对象。
 
-## 四、三种方案的比较
+## 四、基于Proxy/Delegate
+
+当项目有加壳子,插件化或热修复等需求的时候,可以使用Proxy/Delegate Application框架的方式。
+
+在正常的模式中,一个程序一般只有一个Application入口,而Proxy/Delegate模式中需要有两个Application,原程序的Application改为Delegate Application,再新加一个Proxy Application,由Proxy Application 提供一系列的个性化定制,再将所有的context和context相关的引用全部转化为Delegate Application的实例,让外界包括Delegate Application自身都以为该App的Application入口就是Delegate Application.
+
+采用的是Proxy/Delegate Application 框架。
+
+主要实现的流程:
+
+1、替换主程序dex文件为代理启动程序的dex文件
+
+2、代理启动程序启动后,动态加载主程序dex
+
+3、ProxyApplication替换消除本身Context引用为MyApplication
+
+4、启动主程序的Application.
+
+经过上述的步骤处理,由于程序启动dex只是一个代理,而主程序的dex是动态加载的,所以就可以达到不升级主程序不更改版本号只升级dex文件来修复线上紧急bug的目的.
+
+## 五、四种方案的比较
 
 1. Dexposed方法生成补丁难度较大，需要反射写混淆后的代码，粒度太细，如果替换方法很多的话，工作量巨大。
 2. AndFix支持2.3 - 6.0系统，但JNI不像JAVA那样标准，所以偶尔会有未知的机型异常。从实现来说，类似Dexposed，通过JNI来替代方法，更加简洁的完成补丁修复，应用PATCH不需要重启。但由于实现上直接跳过了类初始化，设置为初始化完毕，所以静态函数、静态成员、构造函数都会出现问题，复杂的类Class.forName很可能直接崩溃。
 3. ClassLoader方案支持2.3 - 6.0系统，对启动速度会有略微影响，而且只能下次启动生效。
+4. Proxy/Delegate方案，对于dex的要求比较高，如果DEx文件较为庞大，启动速度会变慢。
 
 相比而言，ClassLoader方案较为可靠，但是如果Dex文件较为庞大，启动速度会变慢；而AndFix则适用于应用不重启即可修复，且方法够简单；Dexposed方案较为复杂，暂不考虑。
 
+## 六、基于以上三种方案的开源框架以及比较
 
+1、Dexpost：
 
+1）原理：在底层虚拟机运行时hoop方法； 
 
+2）缺点：适配方面存在一些问题，目前不支持android6.0，5,1；art运行时； 
 
+3）优点：无需重启就可以达到修复bug的目的；
 
+2、AndFix：
 
+1）原理：在Native层使用指针替换的方法替换bug方法，达到修复bug的目的；
+
+2）缺点：底层替换，稳定性方面可能需要实际检测； 
+
+3）优点：无需中期就可以达到修复bug的目的；
+
+3、HotFix：
+
+1）原理：通过替换类加载器中bugclass，达到修复bug的目的；
+
+2）缺点：需要重新启动才可以修复bug； 
+
+3）优点：java运行层修复，稳定性较好；
+
+4、Nuwa：
+
+1）原理：通过替换类加载器中bugclass，达到修复bug的目的； 
+
+2）缺点：需要重新启动才可以修复bug； 
+
+3）优点：java运行层修复，稳定性较好；自动化热修复
+
+5、DroidFix：
+
+1）原理：通过替换类加载器中bugclass，达到修复bug的目的；
+
+2）缺点：需要重新启动才可以修复bug； 
+
+3）优点：java运行层修复，稳定性较好；
+
+6、dynamic-load-apk
+
+1）缺点：不支持Service和BroadcastReceiver；迁移成本高，需要修改插件，插件app需要继承自proxyActivity
+
+2）优点: 插件无需安装host即可吊起；支持R访问插件资源；插件支持Activity和FragmentActivity；基本无反射调用；插件安装后任可独立运行
+
+7、Droid Plugin
+
+1）缺点：无法使用自定义资源的通知；法注册一些特殊Intent Filter的组件（四大组件）；对Native支持不好
+
+2）优点：插件无需任何修改，可独立安装运行，也可以做插件运行；四大组件无需在Host程序注册；超强隔离性，不同插件运行在不同的进程中；资源完全隔离；实现进程管理，插件的空进程会被及时回收，占用内存低；插件的静态广播会被当作动态处理，如果插件没有运行，静态广播永远不会触发；API侵入性低
+
+8、DynamicAPK
+
+1）优点：
+迁移成本低（无需做任何activity/fragment/resource的proxy实现）不使用代理来管理插件的activity/fragment的生命周期。修改后aapt会处理插件种的资源，R.java中的资源引用和普通Android工程没有区别，开发者可以保持原有的开发规范；
+
+更加有利于并发开发；
+
+提升编译速度；
+
+提升启动速度。
+
+2）缺点：
+
+dex解压、dexopt、加载耗时较长，使用按需加载启动时间过长
