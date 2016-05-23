@@ -477,7 +477,7 @@ Melkman凸包算法继承Graham扫描法的主要思想，并更近一步地采�
 
 	因此，这是一个在线算法，有着其他算法无法比拟的优势。
 
-[![melkman.gif]({{site.baseurl}}/img/melkman.gif)](http://blog.csdn.net/bone_ace/article/details/46239187)
+![melkman.gif]({{site.baseurl}}/img/melkman.gif)
 
 {% highlight ruby %}
 package com.cyw.algorithms;
@@ -732,6 +732,6 @@ public class ConvexHullWithMelkman {
 
 以上几种算法的参考代码，我已经UP到了我的GItHub上面了，分别对应的是：
 
-![javaConvexHull.png]({{site.baseurl}}/img/javaConvexHull.png)
+[![javaConvexHull.png]({{site.baseurl}}/img/javaConvexHull.png)](https://github.com/cyw3/CywLeetCode/tree/master/LeetCode/src/com/cyw/algorithms)
 
 可以点击图片，到GitHub上面按需下载。
