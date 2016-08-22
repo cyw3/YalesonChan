@@ -16,7 +16,7 @@ github_username:  cyw3
 
 permalink:          /:year/:title.html
 
-paginate: 4
+paginate: 7
 paginate_path: "/page/:num"
 comments: true
 
