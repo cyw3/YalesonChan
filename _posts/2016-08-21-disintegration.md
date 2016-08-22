@@ -1,12 +1,12 @@
 ---
-title: [大学者，蜕变之谓也](http://mp.weixin.qq.com/s?__biz=MzIxODE4MjcwNg==&tempkey=cKK8qj12KuyLuENRwlpD40hscYCfPQuWCfrsPDDnV6uPElcfPQ3D3pV3IyFRkmBGssJbivLn7bz9n%2BJ4i6njmUR8HwZEr%2FhTg9mG4dwzvJFFaTQatCE5Y9OW%2FdTTEYczlkqWBaoJUUTGTbO%2FjVQvLQ%3D%3D&#rd)
+title: 大学者，蜕变之谓也
 author: YalesonChan
 profile_picture: http://www.famousbirthdays.com/faces/laurel-stan-image.jpg
 short_bio: If anyone at my funeral has a long face, I'll never speak to him again.
 author_site: https://github.com/cyw3
 ---
 
-总是有很多的借口给自己开脱不更公众号，慢慢的便会错过很多。
+总是有很多的借口给自己开脱不更[公众号](http://mp.weixin.qq.com/s?__biz=MzIxODE4MjcwNg==&tempkey=cKK8qj12KuyLuENRwlpD40hscYCfPQuWCfrsPDDnV6uPElcfPQ3D3pV3IyFRkmBGssJbivLn7bz9n%2BJ4i6njmUR8HwZEr%2FhTg9mG4dwzvJFFaTQatCE5Y9OW%2FdTTEYczlkqWBaoJUUTGTbO%2FjVQvLQ%3D%3D&#rd)，慢慢的便会错过很多。
 
 蓝杰游学已经过去了一个多周，近来才有时间总结，毕竟实习考核在即。很难得的有机会接触这么多的学弟学妹，发现现在蓝杰的人数真是暴涨，自己已然成为了其中的老字辈？！很多人都不认识了。看着这些年轻的面孔，这些手握着大学时光的大一大二生们，有点唏嘘，想起了自己当年的囧样，啥都不懂，屁颠屁颠的到处闹腾。
 
