@@ -235,27 +235,27 @@ Methodref是该引用的具体类别，还有好几种不同的类别，之后�
 
 {% highlight ruby %}
 
-•	CONSTANT_Utf8_info      tag标志位为1,   UTF-8编码的字符串
+CONSTANT_Utf8_info      tag标志位为1,   UTF-8编码的字符串
 
-•	CONSTANT_Integer_info  tag标志位为3，整形字面量
+CONSTANT_Integer_info  tag标志位为3，整形字面量
 
-•	CONSTANT_Float_info     tag标志位为4，浮点型字面量
+CONSTANT_Float_info     tag标志位为4，浮点型字面量
 
-•	CONSTANT_Long_info     tag标志位为5，长整形字面量
+CONSTANT_Long_info     tag标志位为5，长整形字面量
 
-•	CONSTANT_Double_info  tag标志位为6，双精度字面量
+CONSTANT_Double_info  tag标志位为6，双精度字面量
 
-•	CONSTANT_Class_info    tag标志位为7，类或接口的符号引用
+CONSTANT_Class_info    tag标志位为7，类或接口的符号引用
 
-•	CONSTANT_String_info    tag标志位为8，字符串类型的字面量
+CONSTANT_String_info    tag标志位为8，字符串类型的字面量
 
-•	CONSTANT_Fieldref_info  tag标志位为9,  字段的符号引用
+CONSTANT_Fieldref_info  tag标志位为9,  字段的符号引用
 
-•	CONSTANT_Methodref_info  tag标志位为10，类中方法的符号引用
+CONSTANT_Methodref_info  tag标志位为10，类中方法的符号引用
 
-•	CONSTANT_InterfaceMethodref_info tag标志位为11, 接口中方法的符号引用
+CONSTANT_InterfaceMethodref_info tag标志位为11, 接口中方法的符号引用
 
-•	CONSTANT_NameAndType_info tag 标志位为12，字段和方法的名称以及类型的符号引用
+CONSTANT_NameAndType_info tag 标志位为12，字段和方法的名称以及类型的符号引用
 
 {% endhighlight %}
 
@@ -330,7 +330,7 @@ attributes_count和attribute_info分别表示了Code属性中的属性数量和�
 ![javabytecode10.png]({{site.baseurl}}/img/javabytecode10.png)
 
 其中attribute_length为属性的长度，sourcefile_index指向常量池中值为源代码文件名称的常量。
- 
+
 ## <span id="4">4. 指令</span>
 
 以下是具体使用到的Java字节码指令集。
@@ -467,7 +467,7 @@ Java虚拟机可以支持方法级的同步和方法内部一段指令序列的�
 
 同步一段指令集序列通常是由Java语言中的synchronized语句块表示的，Java虚拟机的指令集中有monitorenter和monitorexit指令来支持synchronized关键字的语义。正确实现synchronized关键字需要Javac编译器和Java虚拟机两者共同协作。编译器必须保证每个monitorenter指令都有对应的monitorexit指令。
 
- 
+
 ## <span id="5">5. 再看几个栗子</span>
 
 ### <span id="5.1">例1</span>
