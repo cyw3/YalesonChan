@@ -1,5 +1,5 @@
 ---
-title: 大学者，蜕变之谓也
+title: [大学者，蜕变之谓也](http://mp.weixin.qq.com/s?__biz=MzIxODE4MjcwNg==&tempkey=cKK8qj12KuyLuENRwlpD40hscYCfPQuWCfrsPDDnV6uPElcfPQ3D3pV3IyFRkmBGssJbivLn7bz9n%2BJ4i6njmUR8HwZEr%2FhTg9mG4dwzvJFFaTQatCE5Y9OW%2FdTTEYczlkqWBaoJUUTGTbO%2FjVQvLQ%3D%3D&#rd)
 author: YalesonChan
 profile_picture: http://www.famousbirthdays.com/faces/laurel-stan-image.jpg
 short_bio: If anyone at my funeral has a long face, I'll never speak to him again.
